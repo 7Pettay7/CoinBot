@@ -1,5 +1,3 @@
-# (MVC design) Use controller to get data and pass it in order of crypto.py -> controller.py -> bot.py
-
 import json
 import requests
 
