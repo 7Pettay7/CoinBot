@@ -1,0 +1,15 @@
+{
+    "portfolio": {
+        "API_key": "your_api_key",
+        "API_secret": "your_api_secret",
+        "account_limit": 250
+    },
+    "config": {
+        "discord_token": "your_discord_token",
+        "command_prefix": "!",
+        "alerts": {
+            "times": [ ],
+            "days": [ ]
+        }
+    }
+}
