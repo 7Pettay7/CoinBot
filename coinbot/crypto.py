@@ -195,8 +195,3 @@ class Portfolio:
 
 if __name__ == '__main__':
     print('crypto.py is meant to be run as an imported module')
-    p = Portfolio(auth.get_secrets())
-    c = p.get_balances()
-    d = p.get_dates()
-    h = p.historic_prices(c, d)
-    print(h)
