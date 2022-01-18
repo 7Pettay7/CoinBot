@@ -98,25 +98,18 @@ class Portfolio:
 
         return dates
 
-    def get_price_data(self, crypto, dates):
-        """Get historical data for owned cryptocurrencies and appends 'price_data' key and appropriate values to dictionary that is passed through:
+    def historic_prices(self, crypto, dates):
+        """Gets closing sell price of owned cryptocurrencies from four time intervals and returns dict in the format of:   
+
         {
             'CRYPTO': {
-                'units': int,
-                'dollars': int,
-                'price_data': {
-                    'current_price': int,
-                    'yesterday': int,
-                    'one_week': int,
-                    'one_month': int,
-                    'three_months': int
+                'yesterday': int,
+                'one_week': int,
+                'one_month': int,
+                'three_months': int
                 }
             }
         }
-
-        Each int in historical_data is the closing sell price at the specified time.
-
-        Uses the 'Historic-Crypto' library to grab historical and current cryptocurrency data. Please refer to its documentation here:  https://github.com/David-Woroniuk/Historic_Crypto
 
         NOTE: With the Historic Crytpto library using the Coinbase Pro API to retreive data, some older data is not available. So, the furthest back the data will go is currently 3 months
 
@@ -127,13 +120,9 @@ class Portfolio:
         TODO: optimize the speed of this by having it only grab historical prices and not current prices as well
         """
 
+        historic_prices = { }
         for key in crypto:
-            ticker_currency = key + '-USD' 
-            current_price = LiveCryptoData(
-                ticker_currency, 
-                verbose=False).return_data()
-            current_price = float(
-                current_price.price[0])
+            ticker_currency = key + '-USD'
 
             for index, day in enumerate(dates):
                 try:
@@ -144,7 +133,6 @@ class Portfolio:
                             day, 
                             verbose=False).retrieve_data()
                     
-                    # was trying to optimize this by specifying an end date for the data so it does not have to retrieve as much, but this does not seem to increase speed
                     else:
                         day_after = datetime.now().strptime(day[:10],
                             '%Y-%m-%d') + timedelta(days=1)
@@ -158,21 +146,22 @@ class Portfolio:
                             verbose=False).retrieve_data()
 
                     older_data = float(older_data.close[0])
+                    #print(older_data)
 
                     if index < 1:
-                        crypto[key]['historical_data'] = dict(current_price=current_price)
-                        crypto[key]['historical_data']['yesterday'] = older_data
+                        historic_prices[key] = dict()
+                        historic_prices[key]['yesterday'] = older_data
                     elif index < 2:
-                        crypto[key]['historical_data']['one_week'] = older_data
+                        historic_prices[key]['one_week'] = older_data
                     elif index < 3:
-                        crypto[key]['historical_data']['one_month'] = older_data
+                        historic_prices[key]['one_month'] = older_data
                     elif index < 4:
-                        crypto[key]['historical_data']['three_months'] = older_data
+                        historic_prices[key]['three_months'] = older_data
 
                 except:
                     print('Could not retreive data for {} at date {}'.format(key, day))
 
-        return crypto
+        return historic_prices
 
     # Formatting
     # ------------------------------------------------------
@@ -206,3 +195,8 @@ class Portfolio:
 
 if __name__ == '__main__':
     print('crypto.py is meant to be run as an imported module')
+    p = Portfolio(auth.get_secrets())
+    c = p.get_balances()
+    d = p.get_dates()
+    h = p.historic_prices(c, d)
+    print(h)
