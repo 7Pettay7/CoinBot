@@ -38,6 +38,7 @@ All Discord commands should be prefixed with the specified command prefix; the d
     - [] Discord Bot
       - [X] Total portfolio output
       - [] Output specific currency info \(price, percent up/down, amount owned and total)
+      - [] Use [Discord buttons](https://discordpy-message-components.readthedocs.io/en/latest/index.html) feature to implement pagination on embed of portfolio information (change page to percent up/downs)
       - [] Output data if date and time matches alert config (see [Discord Tasks](https://discordpy.readthedocs.io/en/latest/ext/tasks/index.html))
       - [] Command to edit JSON file to update alerts \(day and time)
       - [] Get list of currencies from watchlist in config file and output pricing info
