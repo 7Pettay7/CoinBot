@@ -163,6 +163,39 @@ class Portfolio:
 
         return historic_prices
 
+    def percent_change(self, historic_prices, current_prices):
+        """Calculates percent change of a cryptocurrency based on their past prices
+        
+        Parameters:
+        historic_prices - a dictionary in the format of {
+            'CRYPTO': {
+                'yesterday': int,
+                'one_week': int,
+                'one_month': int,
+                'three_months': int }}
+        current_prices - a dictionary in the format of {'CRYPTO': int }"""
+        percent_up = lambda old_price, new_price: (
+            (new_price - old_price) / old_price) * 100
+        
+        percent_down = lambda old_price, new_price: (
+            (old_price - new_price) / old_price) * 100
+
+        percent_changes = { }
+        for key, value in historic_prices.items():
+            percent_changes[key] = list()
+            current_price = current_prices[key]
+            up_or_down = lambda old_price: current_price > old_price
+
+            for old_price in value.values():
+                if up_or_down(old_price):
+                    up = percent_up(old_price, current_price)
+                    percent_changes[key].append('+{:.2f}%'.format(up))
+                elif not up_or_down(old_price):
+                    down = percent_down(old_price, current_price)
+                    percent_changes[key].append('-{:.2f}%'.format(down))
+        
+        return percent_changes
+
     # Formatting
     # ------------------------------------------------------
     def sort_dict(self, crypto):

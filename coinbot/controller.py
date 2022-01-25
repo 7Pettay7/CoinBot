@@ -5,7 +5,9 @@ from crypto import Portfolio as folio
 from auth import Authorize as auth
 
 class Controller:
-    """Controller class used to pass and format data to bot from crypto module"""
+    """Controller class used to pass and format data to bot from crypto module
+    
+    TODO: cleanup unneeded self variables"""
 
     def __init__(self, secrets):
         self.login = folio(secrets)
@@ -22,10 +24,14 @@ class Controller:
         return self.current_prices
 
     def historic_data(self):
-        raise NotImplementedError
+        balances = self.portfolio_data()[0]
+        dates = self.login.get_dates()
+        return self.login.historic_prices(balances, dates)
 
-    def calculate_updown(self):
-        raise NotImplementedError
+    def percent_change(self):
+        current_prices = self.current_data()
+        historic_prices = self.historic_data()
+        return self.login.percent_change(historic_prices, current_prices)
 
 if __name__ == '__main__':
     print('controller.py is meant to be ran as an imported module.')
