@@ -5,7 +5,7 @@ class ConfigFileNotAlteredError(Exception):
     def __init__(self, value):
         self.value = value
 
-class Authorize:
+class Configuration:
     """TODO: seperate actions by sensitive info and configuration options (i.e. create another class for config options)"""
 
     def __init__(self):

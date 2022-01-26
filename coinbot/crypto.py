@@ -3,7 +3,7 @@ from Historic_Crypto import HistoricalData
 from Historic_Crypto import LiveCryptoData
 from datetime import datetime, timedelta
 
-from auth import Authorize as auth
+from setup import Configuration as config
 
 class Portfolio:
     """Get user's Coinbase portfolio data by using the base Coinbase API via API key. The Coinbase API documentation can be found here: https://developers.coinbase.com/api/v2#introduction

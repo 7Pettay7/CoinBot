@@ -1,5 +1,5 @@
 from crypto import Portfolio as folio
-from auth import Authorize as auth
+from setup import Configuration as config
 
 class Controller:
     """Controller class used to pass and format data to bot from crypto module"""

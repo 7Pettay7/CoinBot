@@ -1,10 +1,11 @@
 import discord
 from discord.ext import commands
 
-from auth import Authorize as auth
+from setup import Configuration as config
 from controller import Controller
     
-data = Controller(auth.get_secrets())
+setup = config()
+data = Controller(setup.get_secrets())
 
 # Bot config
 # ------------------------------------------------------
@@ -64,4 +65,4 @@ class Coinbot:
         print('Successfully started!')
 
 if __name__ == '__main__':
-    bot.run(auth.get_secrets()[3])
+    bot.run(setup.get_secrets()[3])
