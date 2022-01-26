@@ -6,7 +6,7 @@ class ConfigFileNotAlteredError(Exception):
         self.value = value
 
 class Configuration:
-    """TODO: seperate actions by sensitive info and configuration options (i.e. create another class for config options)"""
+    """Class to get configuration information from config.json and pass it to other files"""
 
     def __init__(self):
         self.current_dir = os.path.dirname(os.path.realpath(__file__))
@@ -18,7 +18,6 @@ class Configuration:
         none"""
         try:
             file_path = self.current_dir + '/config.json'
-
             with open(file_path, 'r') as f:
                 config = json.load(f)
 
@@ -60,7 +59,8 @@ class Configuration:
 
         command_prefix = config['command_prefix']
         alerts = config['alerts']
-        return [command_prefix, alerts]
+        watchlist = config['watchlist']
+        return [command_prefix, alerts, watchlist]
 
 if __name__ == '__main__':
     print('auth.py is meant to run as an imported module.')
