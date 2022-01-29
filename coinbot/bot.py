@@ -21,7 +21,7 @@ class Coinbot:
 
     @bot.command(help='Gets balance of a specific currency in user\'s portfolio. Ex: balance BTC')
     async def balance(ctx, ticker):
-        crypto = data.portfolio_data()[ticker]
+        crypto = data.portfolio_data()[0][ticker]
 
         embed = discord.Embed(
             title='__**{}:**__'.format(ticker), 
