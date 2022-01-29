@@ -32,9 +32,10 @@ All Discord commands should be prefixed with the specified command prefix; the d
     - [X] Grab user's portfolio information
     - [X] Grab current and historic currency data
     - [X] Update data with each request instead of at the start of the app
-    - [] Calculate precent up/down of portfolio based on historic data
+    - [X] Calculate precent change of cryptocurrencies based on historic data
     - [] Optimize fetching of historical data (can take a min)
     - [] Integrate matplotlib for visual aids
+    - [] Connect database to store portfolio information so the user can see their portfolio growth over time
     - [] Discord Bot
       - [X] Total portfolio output
       - [] Output specific currency info \(price, percent up/down, amount owned and total)
@@ -47,16 +48,16 @@ All Discord commands should be prefixed with the specified command prefix; the d
 
  2. Config
     - [X] Create JSON template files to grab config info from
-    - [] Create another class within auth.py to return other general config information (such as command prefix)
+    - [X] Flesh out setup.py to grab other general config info, such as watchlist, command prefix, etc
     - [] Config options 
       - [X] API key/secret
       - [X] Currency limit
       - [X] Discord bot token
       - [X] Alert days and times
       - [X] Changeable command prefix
+      - [X] Add watchlist option where users can add currencies for pricing updates
       - [] Option to opt out of linking Coinbase account (i.e. just retrieve pricing data)
-      - [] Add watchlist option where users can add currencies for pricing updates
-
+      
  3. Admin
     - [X] Select license
     - [] Improve setup guide to explain some of the configuration options in `config-TEMPLATE.json`
