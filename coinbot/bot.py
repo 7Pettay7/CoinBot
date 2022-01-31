@@ -1,5 +1,5 @@
-import discord
-from discord.ext import commands
+import nextcord
+from nextcord.ext import commands
 
 from setup import Configuration as config
 from controller import Controller
@@ -23,7 +23,7 @@ class Coinbot:
     async def balance(ctx, ticker):
         crypto = data.portfolio_data()[ticker]
 
-        embed = discord.Embed(
+        embed = nextcord.Embed(
             title='__**{}:**__'.format(ticker), 
             timestamp=ctx.message.created_at)
 
@@ -41,7 +41,7 @@ class Coinbot:
         portfolio_total = data.portfolio_data()[1]
         prices = data.current_data()
 
-        embed = discord.Embed(
+        embed = nextcord.Embed(
             title='__**Portfolio:**__')
 
         for key, val in portfolio.items():
