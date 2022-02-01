@@ -6,6 +6,7 @@ CoinBot is a Discord bot that can retreive your Coinbase portfolio information v
 
 Make sure to have these installed:
 
+ - [Discord Package](https://github.com/nextcord/nextcord)
  - [Coinbase Package](https://developers.coinbase.com/api/v2#introduction)
  - [Historic_Crypto](https://github.com/David-Woroniuk/Historic_Crypto)
  - [Pandas](https://pypi.org/project/pandas/)
@@ -13,7 +14,7 @@ Make sure to have these installed:
 ## __Setup__
 
  1. Generate Coinbase API key and secret by going to [your Coinbase settings](https://www.coinbase.com/settings/api)
- 2. Create Discord bot and link to server with [this guide](https://discordpy.readthedocs.io/en/stable/discord.html)
+ 2. Create Discord bot and link to server with [this guide](https://nextcord.readthedocs.io/en/latest/discord.html)
  3. Configure `config-TEMPLATE.json` file and rename to `config.json`
  4. Run bot file
 
