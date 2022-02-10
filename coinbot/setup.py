@@ -1,3 +1,4 @@
+from distutils.command.config import config
 import os
 import json
 
@@ -61,6 +62,40 @@ class Configuration:
         alerts = config['alerts']
         watchlist = config['watchlist']
         return [command_prefix, alerts, watchlist]
+
+class WriteConfiguration(Configuration):
+    """Class to write to the config.json file for customization of the config options while using the bot"""
+
+    def __init__(self):
+        self.current_dir = os.path.dirname(os.path.realpath(__file__))
+
+    def write_watchlist(self, *args):
+        """Function that is able to write data to the 'watchlist'
+        item within the config.json file and returns a status code.
+
+        Status codes:
+        0 - Failed to find config file to write to
+        1 - Success
+        
+        Parameters:
+        *args - takes string arguments of currencies' ticker
+        
+        TODO: validation of ticker formatting and type (make sure it's a string)"""
+        status_code = 0
+        data = super().load_json()
+
+        for arg in args:
+            data['config']['watchlist'].append(arg)
+
+        config_path = os.path.join(self.current_dir, 'config.json')
+        try:
+            with open(config_path, 'w') as f:
+                json.dump(data, f, indent=4)
+            status_code = 1
+        except FileNotFoundError:
+            print(f'Writing data to watchlist failed...\nStatus code: {status_code}')
+
+        return status_code
 
 if __name__ == '__main__':
     print('auth.py is meant to run as an imported module.')

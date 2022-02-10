@@ -8,8 +8,8 @@
         "discord_token": "your_discord_token",
         "command_prefix": "!",
         "alerts": {
-            "times": [ ],
-            "days": [ ]
+            "times": [],
+            "days": []
         },
         "watchlist": [ ]
     }
